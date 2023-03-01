@@ -1,3 +1,10 @@
+const arrPicturesDescriptions = [];
+
+const MAX_ID_COUNT = 25;
+const PICTURE_COUNT = 25;
+const MAX_COMMENT_ID = 100000;
+const AVATAR_COUNT = 6;
+
 const DESCRIPTIONS = [
   'good picture',
   'nice view',
@@ -53,11 +60,11 @@ const createUniquRandomNumberFromRange = (min, max) => {
   };
 };
 
-const createRandomId = createUniquRandomNumberFromRange(1,25);
-const createRandomUrlNumber = createUniquRandomNumberFromRange(1,25);
-const createRandomIdForComment = createUniquRandomNumberFromRange(1,10000);
-const createRandomAvatarNumber = createUniquRandomNumberFromRange(1,6);
-const arrPicturesDescriptions = [];
+const createRandomId = createUniquRandomNumberFromRange(1,MAX_ID_COUNT);
+const createRandomUrlNumber = createUniquRandomNumberFromRange(1,PICTURE_COUNT);
+const createRandomIdForComment = createUniquRandomNumberFromRange(1,MAX_COMMENT_ID);
+const createRandomAvatarNumber = createUniquRandomNumberFromRange(1,AVATAR_COUNT);
+
 
 const createPictureDescription = () => ({
   id: createRandomId(),
@@ -80,6 +87,11 @@ const createPictureDescription = () => ({
   ]
 });
 
-for(let i = 0; i < 25; i ++){
-  arrPicturesDescriptions.push(createPictureDescription());
-}
+// eslint-disable-next-line no-unused-vars
+const createArrPicturesDescriptions = (arrLength) => {
+  for(let i = 0; i < arrLength; i ++){
+    arrPicturesDescriptions.push(createPictureDescription());
+  }
+  return arrPicturesDescriptions;
+};
+
