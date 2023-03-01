@@ -37,7 +37,7 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
-const createRandomNumberFromRangeGenerator = (min, max) => {
+const createUniquRandomNumberFromRange = (min, max) => {
   const previousValues = [];
 
   return function () {
@@ -53,10 +53,10 @@ const createRandomNumberFromRangeGenerator = (min, max) => {
   };
 };
 
-const createRandomId = createRandomNumberFromRangeGenerator(1,25);
-const createRandomUrlNumber = createRandomNumberFromRangeGenerator(1,25);
-const createRandomIdForComment = createRandomNumberFromRangeGenerator(1,10000);
-const createRandomAvatarNumber = createRandomNumberFromRangeGenerator(1,6);
+const createRandomId = createUniquRandomNumberFromRange(1,25);
+const createRandomUrlNumber = createUniquRandomNumberFromRange(1,25);
+const createRandomIdForComment = createUniquRandomNumberFromRange(1,10000);
+const createRandomAvatarNumber = createUniquRandomNumberFromRange(1,6);
 const arrPicturesDescriptions = [];
 
 const createPictureDescription = () => ({
