@@ -51,7 +51,7 @@ const createRandomNumberFromRangeGenerator = (min, max) => {
     previousValues.push(currentValue);
     return currentValue;
   };
-}
+};
 
 const createRandomId = createRandomNumberFromRangeGenerator(1,25);
 const createRandomUrlNumber = createRandomNumberFromRangeGenerator(1,25);
@@ -81,5 +81,5 @@ const createPictureDescription = () => ({
 });
 
 for(let i = 0; i < 25; i ++){
-  arrPicturesDescriptions.push(createPictureDescription())
-};
+  arrPicturesDescriptions.push(createPictureDescription());
+}
