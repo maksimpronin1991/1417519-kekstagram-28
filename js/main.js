@@ -1,34 +1,85 @@
-// eslint-disable-next-line no-unused-vars
-const checkStringLength = (string,maxLength) => string.length <= maxLength;
+const DESCRIPTIONS = [
+  'good picture',
+  'nice view',
+  'look amazing',
+  'holywood smile',
+  'nice chuse',
+  'beautiful',
+  'great'
+];
 
-// eslint-disable-next-line no-unused-vars
-const checkPalindrome = (string) => {
-  const lowerString = string.toLowerCase().replaceAll(' ','');
-  let reversedString = '';
-  for(let i = lowerString.length - 1 ; i >= 0 ; i--){
-    reversedString += lowerString[i];
-  }
-  return lowerString === reversedString;
+const MESSAGES_FOR_COMMENTS = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.' ,
+  'В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают.' ,
+  'Как можно было поймать такой неудачный момент?!'
+];
+const NAMES = [
+  'Артём',
+  'Вася',
+  'Паша',
+  'Петя',
+  'Вика',
+  'Настя',
+  'Юля'
+];
+
+
+const getRandomInteger = (min, max) => {
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
 };
 
+const createUniquRandomNumberFromRange = (min, max) => {
+  const previousValues = [];
 
-// eslint-disable-next-line no-unused-vars
-const returnNumber = (string) => {
-  let result = '';
-  for(let i = 0; i < string.length; i ++){
-    if(!Number.isNaN(parseInt(string[i],10))){
-      result += string[i];
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
     }
-  }
-  return parseInt(result,10);
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
 };
 
-// eslint-disable-next-line no-unused-vars
-const padStrig = (string,minLength,addition) => {
-  const freePlace = minLength - string.length;
+const createRandomId = createUniquRandomNumberFromRange(1,25);
+const createRandomUrlNumber = createUniquRandomNumberFromRange(1,25);
+const createRandomIdForComment = createUniquRandomNumberFromRange(1,10000);
+const createRandomAvatarNumber = createUniquRandomNumberFromRange(1,6);
+const arrPicturesDescriptions = [];
 
-  if(freePlace <= 0){
-    return string;
-  }
-  return addition.slice(0 , freePlace % addition.length) + addition.repeat(freePlace / addition.length) + string;
-};
+const createPictureDescription = () => ({
+  id: createRandomId(),
+  url: `photos/${createRandomUrlNumber()}.jpg`,
+  description: DESCRIPTIONS[getRandomInteger(0,DESCRIPTIONS.length - 1)],
+  likes: getRandomInteger(15,200),
+  comments: [
+    {
+      id: createRandomIdForComment(),
+      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
+      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
+      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
+    },
+    {
+      id: createRandomIdForComment(),
+      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
+      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
+      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
+    }
+  ]
+});
+
+for(let i = 0; i < 25; i ++){
+  arrPicturesDescriptions.push(createPictureDescription());
+}
