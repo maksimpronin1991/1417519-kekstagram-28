@@ -1,7 +1,5 @@
 const arrPicturesDescriptions = [];
 
-const MAX_ID_COUNT = 25;
-const PICTURE_COUNT = 25;
 const MAX_COMMENT_ID = 100000;
 const AVATAR_COUNT = 6;
 
@@ -60,15 +58,13 @@ const createUniquRandomNumberFromRange = (min, max) => {
   };
 };
 
-const createRandomId = createUniquRandomNumberFromRange(1,MAX_ID_COUNT);
-const createRandomUrlNumber = createUniquRandomNumberFromRange(1,PICTURE_COUNT);
 const createRandomIdForComment = createUniquRandomNumberFromRange(1,MAX_COMMENT_ID);
 const createRandomAvatarNumber = createUniquRandomNumberFromRange(1,AVATAR_COUNT);
 
 
-const createPictureDescription = () => ({
-  id: createRandomId(),
-  url: `photos/${createRandomUrlNumber()}.jpg`,
+const createPictureDescription = (index) => ({
+  id: index + 1,
+  url: `photos/${index + 1}.jpg`,
   description: DESCRIPTIONS[getRandomInteger(0,DESCRIPTIONS.length - 1)],
   likes: getRandomInteger(15,200),
   comments: [
@@ -90,8 +86,7 @@ const createPictureDescription = () => ({
 // eslint-disable-next-line no-unused-vars
 const createArrPicturesDescriptions = (arrLength) => {
   for(let i = 0; i < arrLength; i ++){
-    arrPicturesDescriptions.push(createPictureDescription());
+    arrPicturesDescriptions.push(createPictureDescription(i));
   }
   return arrPicturesDescriptions;
 };
-
