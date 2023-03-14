@@ -62,7 +62,6 @@ const createPictureDescription = (index) => ({
   ]
 });
 
-// eslint-disable-next-line no-unused-vars
 const createArrPicturesDescriptions = (arrLength) => {
   for(let i = 0; i < arrLength; i ++){
     arrPicturesDescriptions.push(createPictureDescription(i));
