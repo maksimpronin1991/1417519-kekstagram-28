@@ -1,6 +1,5 @@
 import { similarPictures } from './rendering-images.js';
 import './rendering-images.js';
-import { createCommentList } from './rendering-comments.js';
 
 const pictures = document.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
@@ -9,6 +8,45 @@ const likes = bigPicture.querySelector('.likes-count');
 const numberOfComments = bigPicture.querySelector('.comments-count');
 const pictureDescription = bigPicture.querySelector('.social__caption');
 const pictureComments = bigPicture.querySelector('.social__comments');
+
+const similarComment = document.querySelector('.social__comment');
+
+const counterComments = document.querySelector('.social__comment-count');
+const commentsLoader = document.querySelector('.comments-loader');
+
+const COMMENT_FOR_PORTION = 5;
+let commentShown = 0;
+
+const createComment = ({avatar, name, message}) => {
+  const comment = similarComment.cloneNode(true);
+  comment.querySelector('.social__picture').src = avatar;
+  comment.querySelector('.social__picture').alt = name;
+  comment.querySelector('.social__text').textContent = message;
+
+  return comment;
+};
+
+//const onCommentLoader = () => {};
+
+const renderComments = (comments) => {
+  commentShown += COMMENT_FOR_PORTION;
+  if (commentShown >= comments.length){
+    commentsLoader.classList.add('hidden');
+    commentShown = comments.length;
+    commentsLoader.removeEventListener('click',renderComments(comments));
+  }else {
+    commentsLoader.classList.remove('hidden');
+  }
+  const fragment = document.createDocumentFragment();
+  for (let i = 0 ; i < commentShown; i++){
+    const comment = createComment(comments[i]);
+    fragment.append(comment);
+  }
+  pictureComments.textContent = '';
+  pictureComments.append(fragment);
+  counterComments.innerHTML = `${commentShown} из <span class="comments-count">${comments.length}</span> комментариев`;
+
+};
 
 
 const openBigPhoto = (evt) => {
@@ -20,10 +58,7 @@ const openBigPhoto = (evt) => {
     likes.textContent = currentDescripyion.likes;
     numberOfComments.textContent = currentDescripyion.comments.length;
     pictureDescription.textContent = currentDescripyion.description;
-    document.querySelector('.social__comment-count').classList.add('hidden');
-    document.querySelector('.comments-loader').classList.add('hidden');
-    pictureComments.innerHTML = '';
-    pictureComments.appendChild(createCommentList(currentComments));
+    renderComments(currentComments);
   }
 };
 
@@ -31,4 +66,8 @@ pictures.forEach((picture) => {
   picture.addEventListener('click', openBigPhoto);
 });
 
-
+/*
+доработайте код по выводу списка комментариев таким образом, чтобы список показывался не полностью,
+а по 5 элементов, и следующие 5 элементов добавлялись бы по нажатию на кнопку «Загрузить ещё».
+Не забудьте реализовать обновление числа показанных комментариев в блоке .social__comment-count.
+*/
