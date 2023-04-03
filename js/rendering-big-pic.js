@@ -26,14 +26,12 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-//const onCommentLoader = () => {};
-
 const renderComments = (comments) => {
   commentShown += COMMENT_FOR_PORTION;
+
   if (commentShown >= comments.length){
     commentsLoader.classList.add('hidden');
     commentShown = comments.length;
-    commentsLoader.removeEventListener('click',renderComments(comments));
   }else {
     commentsLoader.classList.remove('hidden');
   }
@@ -45,7 +43,6 @@ const renderComments = (comments) => {
   pictureComments.textContent = '';
   pictureComments.append(fragment);
   counterComments.innerHTML = `${commentShown} из <span class="comments-count">${comments.length}</span> комментариев`;
-
 };
 
 
