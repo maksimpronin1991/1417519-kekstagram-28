@@ -88,6 +88,18 @@ const createPictureDescription = (index) => ({
       avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
       message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
       name: NAMES[getRandomInteger(0,NAMES.length - 1)],
+    },
+    {
+      id: createRandomIdForComment(),
+      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
+      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
+      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
+    },
+    {
+      id: createRandomIdForComment(),
+      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
+      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
+      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
     }
   ]
 });

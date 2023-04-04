@@ -16,6 +16,7 @@ const commentsLoader = document.querySelector('.comments-loader');
 
 const COMMENT_FOR_PORTION = 5;
 let commentShown = 0;
+let comments;
 
 const createComment = ({avatar, name, message}) => {
   const comment = similarComment.cloneNode(true);
@@ -26,7 +27,8 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-const renderComments = (comments) => {
+
+const renderComments = () => {
   commentShown += COMMENT_FOR_PORTION;
 
   if (commentShown >= comments.length){
@@ -45,7 +47,6 @@ const renderComments = (comments) => {
   counterComments.innerHTML = `${commentShown} из <span class="comments-count">${comments.length}</span> комментариев`;
 };
 
-
 const openBigPhoto = (evt) => {
   if(evt.target.closest('.picture')){
     const target = evt.target.closest('.picture');
@@ -55,7 +56,10 @@ const openBigPhoto = (evt) => {
     likes.textContent = currentDescripyion.likes;
     numberOfComments.textContent = currentDescripyion.comments.length;
     pictureDescription.textContent = currentDescripyion.description;
-    renderComments(currentComments);
+    comments = currentComments;
+    renderComments();
+    commentsLoader.addEventListener('click', renderComments);
+
   }
 };
 
@@ -63,8 +67,13 @@ pictures.forEach((picture) => {
   picture.addEventListener('click', openBigPhoto);
 });
 
+
 /*
 доработайте код по выводу списка комментариев таким образом, чтобы список показывался не полностью,
 а по 5 элементов, и следующие 5 элементов добавлялись бы по нажатию на кнопку «Загрузить ещё».
 Не забудьте реализовать обновление числа показанных комментариев в блоке .social__comment-count.
+
+
 */
+
+
