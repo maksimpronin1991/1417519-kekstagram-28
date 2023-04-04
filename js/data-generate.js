@@ -41,67 +41,27 @@ const createRandomIdForComment = createUniquRandomNumberFromRange(1,MAX_COMMENT_
 const createRandomAvatarNumber = createUniquRandomNumberFromRange(1,AVATAR_COUNT);
 
 
+const generateComments = () => {
+  const result = [];
+  const commentLength = getRandomInteger(1, 20);
+  for (let i = 0; i < commentLength; i++) {
+    result.push({
+      id: createRandomIdForComment(),
+      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
+      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
+      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
+    });
+  }
+
+  return result;
+};
+
 const createPictureDescription = (index) => ({
   id: index + 1,
   url: `photos/${index + 1}.jpg`,
   description: DESCRIPTIONS[getRandomInteger(0,DESCRIPTIONS.length - 1)],
   likes: getRandomInteger(15,200),
-  comments: [
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    },
-    {
-      id: createRandomIdForComment(),
-      avatar: `img/avatar-${createRandomAvatarNumber()}.svg`,
-      message: MESSAGES_FOR_COMMENTS[getRandomInteger(0,MESSAGES_FOR_COMMENTS.length - 1)],
-      name: NAMES[getRandomInteger(0,NAMES.length - 1)],
-    }
-  ]
+  comments:generateComments(),
 });
 
 const createArrPicturesDescriptions = (arrLength) => {
