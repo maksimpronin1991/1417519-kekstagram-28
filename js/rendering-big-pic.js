@@ -14,7 +14,6 @@ const pictureComments = bigPicture.querySelector('.social__comments');
 const commentsLoader = document.querySelector('.comments-loader');
 const commentsCounter = document.querySelector('.social__comment-count');
 
-// Функция добавляет комментарий в список
 const renderComment = (src, message, name) => {
   const comment = document.createElement('li');
   comment.classList.add('social__comment');
@@ -34,7 +33,6 @@ const renderComment = (src, message, name) => {
   pictureComments.append(comment);
 };
 
-// Функция позволяет для каждой фотографии создать счетчик показанных комментариев
 const countAmountOfComments = () => {
   let currentComment = 0;
   return function() {
@@ -52,11 +50,9 @@ const openBigPhoto = (evt) => {
     numberOfComments.textContent = currentPost.comments.length;
     pictureDescription.textContent = currentPost.description;
 
-    // Очистим список комментариев и скроем кнопку загрузить и количество комментариев по умолчанию
-
+    commentsLoader.classList.add('hidden');
     pictureComments.innerHTML = '';
 
-    // Функция обновляет количество комментариев, показывает/скрывает кнопку Загрузить еще
     const updateCommentElements = () => {
       const commentsCount = document.createElement('span');
       commentsCount.classList.add('comments-count');
@@ -73,7 +69,6 @@ const openBigPhoto = (evt) => {
       }
     };
 
-    // Первая пачка комментариев
     for(let i = 0; i < AMOUNT_OF_COMMENTS; i++){
       if(currentPost.comments[i]){
         const {avatar, message, name} = currentPost.comments[i];
@@ -83,13 +78,11 @@ const openBigPhoto = (evt) => {
     updateCommentElements();
     const getCommentsAmount = countAmountOfComments();
 
-    // Показать следующую пачку комментариев
     const renderNextComments = () => {
       const currentAmountOfComments = getCommentsAmount();
       const restComments = currentPost.comments.length - currentAmountOfComments;
       const nextAmountOfComments = currentAmountOfComments + AMOUNT_OF_COMMENTS;
 
-      // Отрисовка  пачки комментариев, начиная с указанного индекса
       const getNextComments = (beforeNumber) => {
         for(let i = currentAmountOfComments; i < beforeNumber; i++){
           if(currentPost.comments[i]){
@@ -99,7 +92,6 @@ const openBigPhoto = (evt) => {
         }
       };
 
-      // Если есть еще не показанные комменатрии, больше 5 штук
       if(restComments >= AMOUNT_OF_COMMENTS && restComments <= currentPost.comments.length) {
         getNextComments(nextAmountOfComments);
       } else if (restComments > 0 && restComments < AMOUNT_OF_COMMENTS) { // Если осталось <= 5 непоказанных комментариев
