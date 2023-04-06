@@ -24,7 +24,6 @@ const renderComment = (src, message, name) => {
   img.alt = name;
   img.width = '35';
   img.height = '35';
-
   const textMessage = document.createElement('p');
   textMessage.classList.add('social__text');
   textMessage.textContent = message;
