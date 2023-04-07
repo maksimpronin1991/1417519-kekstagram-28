@@ -14,46 +14,49 @@ const pristine = new Pristine(form,{
   errorTextClass: 'img-upload__field-wrapper__error'
 });
 
-const validateHashtagLength = (value) => {
-  const arrHashtags = value.trim().split(' ');
-  if(arrHashtags.length > 5){
-    imgUploadSubmit.disabled = true;
-    return false;
-  }
-  imgUploadSubmit.disabled = false;
-  return true;
-};
-
 const validateHashtag = (value) => {
-  const regexpForHashtag = (/^#[a-zа-яё0-9]{1,19}$/i);
-  const arrHashtags = value.trim().split(' ');
-  for(let i = 0; i < arrHashtags.length; i++){
-    if(!regexpForHashtag.test(arrHashtags[i])){
-      imgUploadSubmit.disabled = true;
+
+  const validateHashtagLength = () => {
+    const arrHashtags = value.trim().split(' ');
+    if(arrHashtags.length > 5){
       return false;
     }
-  }
-  imgUploadSubmit.disabled = false;
-  return true;
-};
+    return true;
+  };
 
-const validateHashtagDublicate = (value) => {
-  const arrHashtags = value.trim().split(' ');
-  function hasDuplicates() {
-    return new Set(arrHashtags).size !== arrHashtags.length;
-  }
+  const validateHashtagExp = () => {
+    const regexpForHashtag = (/^#[a-zа-яё0-9]{1,19}$/i);
+    const arrHashtags = value.trim().split(' ');
+    for(let i = 0; i < arrHashtags.length; i++){
+      if(!regexpForHashtag.test(arrHashtags[i])){
+        return false;
+      }
+    }
+    return true;
+  };
 
-  if (hasDuplicates(arrHashtags)) {
-    imgUploadSubmit.disabled = true;
-    return false;
-  }else {
+  const validateHashtagDublicate = () => {
+    const arrHashtags = value.trim().split(' ');
+    function hasDuplicates() {
+      return new Set(arrHashtags).size !== arrHashtags.length;
+    }
+
+    if (hasDuplicates(arrHashtags)) {
+      return false;
+    }else {
+      return true;
+    }
+  };
+  if(validateHashtagLength(value) && validateHashtagExp(value) && validateHashtagDublicate(value)){
     imgUploadSubmit.disabled = false;
     return true;
+  }else{
+    imgUploadSubmit.disabled = true;
+    return false;
   }
 };
-pristine.addValidator(hashtagsField,validateHashtagLength,'Должно быть указанно максимум 5 хэштегов');
-pristine.addValidator(hashtagsField,validateHashtag,'Должен начинаться с символа #, содержать более 1 менее 20 символов или чисел ');
-pristine.addValidator(hashtagsField,validateHashtagDublicate,'Один и тот же хэш-тег не может быть использован дважды ');
+pristine.addValidator(hashtagsField,validateHashtag,'Должен начинаться с символа #, содержать более 1 менее 20 символов или чисел,должно быть указанно максимум 5 хэштегов, один и тот же хэш-тег не может быть использован дважды.');
+
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -72,7 +75,8 @@ function openImgEditForm () {
 function closeImgEditForm () {
   imageEditingForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  imgUploadInput.value = '';
+  form.reset();
+  pristine.reset();
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
@@ -93,4 +97,3 @@ commentField.addEventListener('blur',addAddingListenter);
 imgUploadInput.addEventListener('change',openImgEditForm);
 
 btnEditingFormCancel.addEventListener('click',closeImgEditForm);
-
