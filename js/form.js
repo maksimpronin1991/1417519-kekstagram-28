@@ -47,7 +47,11 @@ const validateHashtag = (value) => {
       return true;
     }
   };
+
   if(validateHashtagLength(value) && validateHashtagExp(value) && validateHashtagDublicate(value)){
+    imgUploadSubmit.disabled = false;
+    return true;
+  }else if (value.length === 0){
     imgUploadSubmit.disabled = false;
     return true;
   }else{
