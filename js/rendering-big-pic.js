@@ -56,7 +56,6 @@ const openBigPhoto = (evt) => {
       const commentsCount = document.createElement('span');
       commentsCount.classList.add('comments-count');
       const lenghtComments = document.querySelectorAll('.social__comment').length;
-
       commentsCounter.textContent = `${lenghtComments} из `;
       commentsCounter.append(commentsCount);
       commentsCount.textContent = `${currentPost.comments.length} комментариев`;
@@ -93,7 +92,7 @@ const openBigPhoto = (evt) => {
 
       if(restComments >= AMOUNT_OF_COMMENTS && restComments <= currentPost.comments.length) {
         getNextComments(nextAmountOfComments);
-      } else if (restComments > 0 && restComments < AMOUNT_OF_COMMENTS) { // Если осталось <= 5 непоказанных комментариев
+      } else if (restComments > 0 && restComments < AMOUNT_OF_COMMENTS) {
         const restIndex = restComments + currentAmountOfComments;
         getNextComments(restIndex);
       }

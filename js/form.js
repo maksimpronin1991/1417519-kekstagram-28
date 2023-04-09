@@ -1,3 +1,6 @@
+import './scale.js';
+import './effects.js';
+import { resetScale } from './scale.js';
 import { isEscapeKey } from './util.js';
 
 const imgUploadInput = document.querySelector('#upload-file');
@@ -79,6 +82,7 @@ function openImgEditForm () {
 function closeImgEditForm () {
   imageEditingForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  resetScale();
   form.reset();
   pristine.reset();
   document.removeEventListener('keydown', onDocumentKeydown);
