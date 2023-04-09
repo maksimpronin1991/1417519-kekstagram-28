@@ -9,7 +9,6 @@ const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeBigPicture();
-
   }
 };
 
