@@ -1,10 +1,9 @@
-import {createArrPicturesDescriptions} from './data-generate.js';
-
+import { data } from './api.js';
 
 const pictures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const similarPictures = createArrPicturesDescriptions(25);
+const similarPictures = data;
 
 const similarListFragment = document.createDocumentFragment();
 
