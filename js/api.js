@@ -1,7 +1,6 @@
 import { setOnFormSubmit, closeImgEditForm } from './form.js';
-const successMessage = document.querySelector('#success').content.querySelector('.success');
-const errorMessage = document.querySelector('#error').content.querySelector('.error');
-
+import { showSuccessMessage,showErrorMessage } from './message.js';
+import './message.js';
 
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 const Route = {
@@ -53,21 +52,7 @@ const sendData = (body) => {
   load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
 };
 
-const showSuccessMessage = () => {
-  document.body.append(successMessage);
-  const clouseBtn = successMessage.querySelector('.success__button');
-  clouseBtn.addEventListener('click', ()=>{
-    successMessage.remove();
-  });
-};
 
-const showErrorMessage = () => {
-  document.body.append(errorMessage);
-  const clouseBtn = successMessage.querySelector('.error__button');
-  clouseBtn.addEventListener('click', ()=>{
-    successMessage.remove();
-  });
-};
 const data = await getData();
 
 
