@@ -1,3 +1,6 @@
+import './scale.js';
+import './effects.js';
+import { resetScale } from './scale.js';
 import { isEscapeKey } from './util.js';
 
 const imgUploadInput = document.querySelector('#upload-file');
@@ -79,6 +82,7 @@ function openImgEditForm () {
 function closeImgEditForm () {
   imageEditingForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  resetScale();
   form.reset();
   pristine.reset();
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -92,6 +96,28 @@ function addAddingListenter () {
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
+function blockSubmitButton () {
+  imgUploadSubmit.disabled = true;
+}
+
+function unblockSubmitButton () {
+  imgUploadSubmit.disabled = false;
+}
+
+const setOnFormSubmit = (cb) => {
+  form.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if(isValid){
+      blockSubmitButton();
+      await cb(new FormData(form));
+      unblockSubmitButton();
+    }
+  });
+};
+
+
 hashtagsField.addEventListener('focus',addRemovingListener);
 commentField.addEventListener('focus',addRemovingListener);
 
@@ -101,3 +127,5 @@ commentField.addEventListener('blur',addAddingListenter);
 imgUploadInput.addEventListener('change',openImgEditForm);
 
 btnEditingFormCancel.addEventListener('click',closeImgEditForm);
+
+export { setOnFormSubmit, closeImgEditForm };
