@@ -46,9 +46,8 @@ const validateHashtag = (value) => {
 
     if (hasDuplicates(arrHashtags)) {
       return false;
-    }else {
-      return true;
     }
+    return true;
   };
 
   if(validateHashtagLength(value) && validateHashtagExp(value) && validateHashtagDublicate(value)){
@@ -57,10 +56,9 @@ const validateHashtag = (value) => {
   }else if (value.length === 0){
     imgUploadSubmit.disabled = false;
     return true;
-  }else{
-    imgUploadSubmit.disabled = true;
-    return false;
   }
+  imgUploadSubmit.disabled = true;
+  return false;
 };
 pristine.addValidator(hashtagsField,validateHashtag,'Должен начинаться с символа #, содержать более 1 менее 20 символов или чисел,должно быть указанно максимум 5 хэштегов, один и тот же хэш-тег не может быть использован дважды.');
 
