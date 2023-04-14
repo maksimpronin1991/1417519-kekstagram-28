@@ -42,6 +42,7 @@ function closeErrorMessage (){
   document.removeEventListener('keydown', onDocumentKeydown);
   document.removeEventListener('click', onOutsideMessage);
 }
+
 function closeSuccsesMessage (){
   successMessage.remove();
   document.body.classList.remove('modal-open');

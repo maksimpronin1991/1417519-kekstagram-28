@@ -33,7 +33,8 @@ const getErr = (message) => {
     alert.remove();
   },5000);
 };
-const load = (route,errorText,method = Method.GET, body = null) =>
+
+const load = (route,errorText,method = Method.GET, body = null, showErrorPopup = false) =>
   fetch(`${BASE_URL}${route}`, { method, body})
     .then((response) => {
       if(!response.ok){
@@ -42,19 +43,18 @@ const load = (route,errorText,method = Method.GET, body = null) =>
       return response.json();
     })
     .catch(() => {
-      throw new Error(getErr(errorText));
+      if (showErrorPopup) {
+        throw new Error(errorText);
+      }
+
+      getErr(errorText);
+      return [];
     });
 
 
 const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
 
-const sendData = (body) => {
-  load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
-};
-
-
-const data = await getData();
-
+const sendData = (body) => load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body, true);
 
 setOnFormSubmit(async (formData) => {
   try{
@@ -65,5 +65,7 @@ setOnFormSubmit(async (formData) => {
     showErrorMessage();
   }
 });
+
+const data = await getData();
 
 export { data };
