@@ -1,5 +1,4 @@
 import { similarPictures } from './rendering-images.js';
-import './rendering-images.js';
 
 const AMOUNT_OF_COMMENTS = 5;
 
