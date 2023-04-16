@@ -9,29 +9,30 @@ const filterDiscussed = document.querySelector('#filter-discussed');
 const sortRandomly = () => Math.random() - 0.5;
 
 const sortByComments = (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length;
-
+let newData = data;
 
 const onImgFilter = (evt)=>{
   if(evt.target.id === 'filter-default'){
     evt.target.classList.add('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
-    return [...data];
+    console.log(newData)
+    return newData;
   }
   if(evt.target.id === 'filter-random'){
     evt.target.classList.add('img-filters__button--active');
     filterDefault.classList.remove('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
 
-    return [...data].sort(sortRandomly).slice(0,PICTURES_COUNT);
-
+    newData = [...data].sort(sortRandomly).slice(0,PICTURES_COUNT);
+    console.log(newData)
   }
   if(evt.target.id === 'filter-discussed'){
     evt.target.classList.add('img-filters__button--active');
     filterDefault.classList.remove('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
-
-    return [...data].sort(sortByComments);
+    newData = [...data].sort(sortByComments);
+    console.log(newData)
   }
 };
 
