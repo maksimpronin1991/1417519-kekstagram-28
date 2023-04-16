@@ -1,5 +1,3 @@
-import { data } from './api.js';
-import './filter.js';
 const pictures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -21,6 +19,5 @@ const renderingSimilarPictures = (arrPictures) => {
 
   pictures.appendChild(similarListFragment);
 };
-renderingSimilarPictures(data);
 
-export {data};
+export {renderingSimilarPictures};

@@ -1,4 +1,4 @@
-import { data } from './rendering-images.js';
+import { data } from './filter.js';
 
 const AMOUNT_OF_COMMENTS = 5;
 
@@ -103,8 +103,11 @@ const openBigPhoto = (evt) => {
   }
 };
 
-pictures.forEach((picture) => {
-  picture.addEventListener('click', openBigPhoto);
-});
+function addedListenerOpenBigPic (arr) {
+  arr.forEach((picture) => {
+    picture.addEventListener('click', openBigPhoto);
+  });
+}
 
-
+addedListenerOpenBigPic(pictures);
+export {openBigPhoto,addedListenerOpenBigPic};
