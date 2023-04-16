@@ -1,15 +1,14 @@
 import { data } from './api.js';
-
+import './filter.js';
 const pictures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const similarPictures = data;
 
-const renderingSimilarPictures = () => {
+const renderingSimilarPictures = (arrPictures) => {
 
   const similarListFragment = document.createDocumentFragment();
 
-  similarPictures.forEach(({id,url,likes,comments,description}) => {
+  arrPictures.forEach(({id,url,likes,comments,description}) => {
     const pictureElement = similarPictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__img').alt = description;
@@ -22,6 +21,6 @@ const renderingSimilarPictures = () => {
 
   pictures.appendChild(similarListFragment);
 };
-renderingSimilarPictures();
+renderingSimilarPictures(data);
 
-export {similarPictures};
+export {data};

@@ -1,5 +1,4 @@
-import { similarPictures } from './rendering-images.js';
-import './rendering-images.js';
+import { data } from './rendering-images.js';
 
 const AMOUNT_OF_COMMENTS = 5;
 
@@ -43,7 +42,7 @@ const countAmountOfComments = () => {
 const openBigPhoto = (evt) => {
   if(evt.target.closest('.picture')){
     const target = evt.target.closest('.picture');
-    const currentPost = similarPictures.find((item) => item.id === Number(target.dataset.id));
+    const currentPost = data.find((item) => item.id === Number(target.dataset.id));
     bigPictureImg.src = currentPost.url;
     likes.textContent = currentPost.likes;
     numberOfComments.textContent = currentPost.comments.length;
