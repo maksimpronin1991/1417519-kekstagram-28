@@ -2,7 +2,6 @@ import { data } from './filter.js';
 
 const AMOUNT_OF_COMMENTS = 5;
 
-const pictures = document.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const likes = bigPicture.querySelector('.likes-count');
@@ -103,11 +102,12 @@ const openBigPhoto = (evt) => {
   }
 };
 
-function addedListenerOpenBigPic (arr) {
-  arr.forEach((picture) => {
+function addedListenerOpenBigPic () {
+  const pictures = document.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
     picture.addEventListener('click', openBigPhoto);
   });
 }
 
-addedListenerOpenBigPic(pictures);
+addedListenerOpenBigPic();
 export {openBigPhoto,addedListenerOpenBigPic};
