@@ -20,13 +20,12 @@ let newData = data;
 const defaultPictures = data;
 
 
-const onImgFilter = (evt)=>{
+const onImgFilterClick = (evt)=>{
   if(evt.target.id === 'filter-default'){
     evt.target.classList.add('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
-    const debouncedPic = debounce(()=>renderingSimilarPictures(defaultPictures));
-    debouncedPic();
+    renderingSimilarPictures(defaultPictures);
     addedListenerOpenBigPic();
     handleMiniatureClick();
     return newData;
@@ -35,11 +34,8 @@ const onImgFilter = (evt)=>{
     evt.target.classList.add('img-filters__button--active');
     filterDefault.classList.remove('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
-
     newData = [...data].sort(sortRandomly).slice(0,PICTURES_COUNT);
-
-    const debouncedPic = debounce(()=> renderingSimilarPictures(newData));
-    debouncedPic();
+    renderingSimilarPictures(newData);
     addedListenerOpenBigPic();
     handleMiniatureClick();
   }
@@ -48,14 +44,14 @@ const onImgFilter = (evt)=>{
     filterDefault.classList.remove('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
     newData = [...data].sort(sortByComments);
-    const debouncedPic = debounce(()=> renderingSimilarPictures(newData));
-    debouncedPic();
+    renderingSimilarPictures(newData);
     addedListenerOpenBigPic();
     handleMiniatureClick();
   }
 };
 
-imgFiltersForm.addEventListener('click',onImgFilter);
+
+imgFiltersForm.addEventListener('click',debounce(onImgFilterClick));
 
 
 export {data};

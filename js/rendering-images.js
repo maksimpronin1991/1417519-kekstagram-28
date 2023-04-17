@@ -15,8 +15,8 @@ const renderingSimilarPictures = (arrPictures) => {
     pictureElement.dataset.id = id;
     similarListFragment.appendChild(pictureElement);
   });
-
   document.querySelectorAll('.picture').forEach((el) => el.remove());
+
   pictures.appendChild(similarListFragment);
 };
 
