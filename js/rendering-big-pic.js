@@ -1,5 +1,6 @@
 import { data } from './filter.js';
 
+
 const AMOUNT_OF_COMMENTS = 5;
 
 const bigPicture = document.querySelector('.big-picture');
