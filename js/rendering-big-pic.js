@@ -1,9 +1,7 @@
-import { similarPictures } from './rendering-images.js';
-import './rendering-images.js';
+import { data } from './filter.js';
 
 const AMOUNT_OF_COMMENTS = 5;
 
-const pictures = document.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const likes = bigPicture.querySelector('.likes-count');
@@ -43,7 +41,7 @@ const countAmountOfComments = () => {
 const openBigPhoto = (evt) => {
   if(evt.target.closest('.picture')){
     const target = evt.target.closest('.picture');
-    const currentPost = similarPictures.find((item) => item.id === Number(target.dataset.id));
+    const currentPost = data.find((item) => item.id === Number(target.dataset.id));
     bigPictureImg.src = currentPost.url;
     likes.textContent = currentPost.likes;
     numberOfComments.textContent = currentPost.comments.length;
@@ -104,8 +102,12 @@ const openBigPhoto = (evt) => {
   }
 };
 
-pictures.forEach((picture) => {
-  picture.addEventListener('click', openBigPhoto);
-});
+function addedListenerOpenBigPic () {
+  const pictures = document.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
+    picture.addEventListener('click', openBigPhoto);
+  });
+}
 
-
+addedListenerOpenBigPic();
+export {openBigPhoto,addedListenerOpenBigPic};

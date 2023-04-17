@@ -10,6 +10,8 @@ const hashtagsField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 const form = document.querySelector('.img-upload__form');
 const imgUploadSubmit = document.querySelector('.img-upload__submit');
+const fileField = document.querySelector('#upload-file');
+const modalUpload = form.querySelector('.img-upload__overlay');
 
 const pristine = new Pristine(form,{
   classTo: 'img-upload__field-wrapper',
@@ -73,6 +75,11 @@ const onDocumentKeydown = (evt) => {
 function openImgEditForm () {
   imageEditingForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
+
+  const file = fileField.files[0];
+  const preview = modalUpload.querySelector('img');
+
+  preview.src = URL.createObjectURL(file);
 
   document.addEventListener('keydown', onDocumentKeydown);
 }

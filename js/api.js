@@ -2,6 +2,10 @@ import { setOnFormSubmit, closeImgEditForm } from './form.js';
 import { showSuccessMessage,showErrorMessage } from './message.js';
 import './message.js';
 
+
+const imgFilters = document.querySelector('.img-filters');
+
+
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 const Route = {
   GET_DATA: '/data',
@@ -40,6 +44,7 @@ const load = (route,errorText,method = Method.GET, body = null, showErrorPopup =
       if(!response.ok){
         throw new Error();
       }
+      imgFilters.classList.remove('img-filters--inactive');
       return response.json();
     })
     .catch(() => {

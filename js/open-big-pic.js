@@ -1,7 +1,6 @@
 import { isEscapeKey } from './util.js';
 import './rendering-big-pic.js';
 const bigPicture = document.querySelector('.big-picture');
-const pictures = document.querySelectorAll('.picture');
 const btnBigPicturCancel = bigPicture.querySelector('.big-picture__cancel');
 
 
@@ -27,8 +26,15 @@ function closeBigPicture (){
 
 }
 
-pictures.forEach((picture) => {
-  picture.addEventListener('click', openBigPicture);
-});
+const handleMiniatureClick = () => {
+  const pictures = document.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
+    picture.addEventListener('click', openBigPicture);
+  });
 
-btnBigPicturCancel.addEventListener('click',closeBigPicture);
+  btnBigPicturCancel.addEventListener('click',closeBigPicture);
+};
+
+handleMiniatureClick();
+
+export {handleMiniatureClick};

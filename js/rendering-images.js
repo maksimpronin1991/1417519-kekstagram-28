@@ -1,15 +1,12 @@
-import { data } from './api.js';
-
 const pictures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const similarPictures = data;
 
-const renderingSimilarPictures = () => {
+const renderingSimilarPictures = (arrPictures) => {
 
   const similarListFragment = document.createDocumentFragment();
 
-  similarPictures.forEach(({id,url,likes,comments,description}) => {
+  arrPictures.forEach(({id,url,likes,comments,description}) => {
     const pictureElement = similarPictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__img').alt = description;
@@ -18,10 +15,9 @@ const renderingSimilarPictures = () => {
     pictureElement.dataset.id = id;
     similarListFragment.appendChild(pictureElement);
   });
-
+  document.querySelectorAll('.picture').forEach((el) => el.remove());
 
   pictures.appendChild(similarListFragment);
 };
-renderingSimilarPictures();
 
-export {similarPictures};
+export {renderingSimilarPictures};
