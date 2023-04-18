@@ -81,14 +81,8 @@ const updateSlider = () => {
 
   if(isDefault()){
     hideSlider();
-<<<<<<< HEAD
   }
   showSlider();
-=======
-  }else{
-    showSlider();
-  }
->>>>>>> master
 };
 
 const onEffectsChange = (evt) => {

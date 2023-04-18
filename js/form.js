@@ -133,25 +133,4 @@ imgUploadInput.addEventListener('change',openImgEditForm);
 
 btnEditingFormCancel.addEventListener('click',closeImgEditForm);
 
-function blockSubmitButton () {
-  imgUploadSubmit.disabled = true;
-}
-
-function unblockSubmitButton () {
-  imgUploadSubmit.disabled = false;
-}
-
-const setOnFormSubmit = (cb) => {
-  form.addEventListener('submit', async (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-
-    if(isValid){
-      blockSubmitButton();
-      await cb(new FormData(form));
-      unblockSubmitButton();
-    }
-  });
-};
-
 export {closeImgEditForm, setOnFormSubmit};
