@@ -15,6 +15,7 @@ const onOutsideMessage = (evt) => {
   const click = evt.composedPath().includes(document.querySelector('.success__inner'));
   if(!click){
     successMessage.remove();
+    errorMessage.remove();
     document.body.classList.remove('modal-open');
   }
 };
