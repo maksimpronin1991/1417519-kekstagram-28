@@ -10,6 +10,7 @@ const onDocumentKeydownInMessage = (evt) => {
     evt.preventDefault();
     closeSuccsesMessage();
     errorMessage.remove();
+    document.addEventListener('keydown', onDocumentKeydown);
   }
 };
 
