@@ -53,12 +53,12 @@ const openBigPhoto = (evt) => {
     const updateCommentElements = () => {
       const commentsCount = document.createElement('span');
       commentsCount.classList.add('comments-count');
-      const lenghtComments = document.querySelectorAll('.social__comment').length;
-      commentsCounter.textContent = `${lenghtComments} из `;
+      const lenghtComments2 = document.querySelectorAll('.social__comment').length;
+      commentsCounter.textContent = `${lenghtComments2} из `;
       commentsCounter.append(commentsCount);
       commentsCount.textContent = `${currentPost.comments.length} комментариев`;
 
-      if(lenghtComments === currentPost.comments.length) {
+      if(lenghtComments2 === currentPost.comments.length) {
         commentsLoader.classList.add('hidden');
       } else {
         commentsLoader.classList.remove('hidden');
@@ -96,6 +96,13 @@ const openBigPhoto = (evt) => {
       }
       updateCommentElements();
     };
+    const lenghtComments = document.querySelectorAll('.social__comment').length;
+    if(lenghtComments === currentPost.comments.length) {
+      commentsLoader.classList.add('hidden');
+    } else {
+      commentsLoader.classList.remove('hidden');
+      commentsLoader.removeEventListener('click', renderNextComments);
+    }
 
     commentsLoader.addEventListener('click', renderNextComments);
 
