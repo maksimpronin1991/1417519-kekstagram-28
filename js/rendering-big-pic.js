@@ -1,5 +1,4 @@
 import { data } from './filter.js';
-
 const AMOUNT_OF_COMMENTS = 5;
 
 const bigPicture = document.querySelector('.big-picture');
@@ -8,6 +7,7 @@ const likes = bigPicture.querySelector('.likes-count');
 const numberOfComments = bigPicture.querySelector('.comments-count');
 const pictureDescription = bigPicture.querySelector('.social__caption');
 const pictureComments = bigPicture.querySelector('.social__comments');
+
 
 const commentsLoader = document.querySelector('.comments-loader');
 const commentsCounter = document.querySelector('.social__comment-count');
@@ -53,12 +53,12 @@ const openBigPhoto = (evt) => {
     const updateCommentElements = () => {
       const commentsCount = document.createElement('span');
       commentsCount.classList.add('comments-count');
-      const lenghtComments2 = document.querySelectorAll('.social__comment').length;
-      commentsCounter.textContent = `${lenghtComments2} из `;
+      const lenghtComments = document.querySelectorAll('.social__comment').length;
+      commentsCounter.textContent = `${lenghtComments} из `;
       commentsCounter.append(commentsCount);
       commentsCount.textContent = `${currentPost.comments.length} комментариев`;
 
-      if(lenghtComments2 === currentPost.comments.length) {
+      if(lenghtComments === currentPost.comments.length) {
         commentsLoader.classList.add('hidden');
       } else {
         commentsLoader.classList.remove('hidden');
@@ -93,21 +93,18 @@ const openBigPhoto = (evt) => {
       } else if (restComments > 0 && restComments < AMOUNT_OF_COMMENTS) {
         const restIndex = restComments + currentAmountOfComments;
         getNextComments(restIndex);
+
       }
       updateCommentElements();
+      if(commentsLoader.classList.contains('hidden')){
+        commentsLoader.removeEventListener('click', renderNextComments);
+      }
     };
-    const lenghtComments = document.querySelectorAll('.social__comment').length;
-    if(lenghtComments === currentPost.comments.length) {
-      commentsLoader.classList.add('hidden');
-    } else {
-      commentsLoader.classList.remove('hidden');
-      commentsLoader.removeEventListener('click', renderNextComments);
-    }
-
     commentsLoader.addEventListener('click', renderNextComments);
 
   }
 };
+
 
 function addedListenerOpenBigPic () {
   const pictures = document.querySelectorAll('.picture');

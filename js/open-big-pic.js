@@ -21,9 +21,7 @@ function openBigPicture (){
 function closeBigPicture (){
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-
   document.removeEventListener('keydown', onDocumentKeydown);
-
 }
 
 const handleMiniatureClick = () => {
@@ -31,10 +29,9 @@ const handleMiniatureClick = () => {
   pictures.forEach((picture) => {
     picture.addEventListener('click', openBigPicture);
   });
-
   btnBigPicturCancel.addEventListener('click',closeBigPicture);
 };
 
 handleMiniatureClick();
 
-export {handleMiniatureClick};
+export {handleMiniatureClick,closeBigPicture};
