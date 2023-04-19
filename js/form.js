@@ -133,4 +133,4 @@ imgUploadInput.addEventListener('change',openImgEditForm);
 
 btnEditingFormCancel.addEventListener('click',closeImgEditForm);
 
-export {closeImgEditForm, setOnFormSubmit};
+export {closeImgEditForm, setOnFormSubmit,onDocumentKeydown};
