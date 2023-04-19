@@ -14,7 +14,7 @@ const onDocumentKeydown = (evt) => {
 const onOutsideMessage = (evt) => {
   const click = evt.composedPath().includes(document.querySelector('.success__inner'));
   if(!click){
-    document.querySelector('.upload__status').remove();
+    successMessage.remove();
     document.body.classList.remove('modal-open');
   }
 };
