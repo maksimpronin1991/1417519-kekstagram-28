@@ -93,12 +93,10 @@ const openBigPhoto = (evt) => {
       } else if (restComments > 0 && restComments < AMOUNT_OF_COMMENTS) {
         const restIndex = restComments + currentAmountOfComments;
         getNextComments(restIndex);
-
-      }
-      updateCommentElements();
-      if(commentsLoader.classList.contains('hidden')){
         commentsLoader.removeEventListener('click', renderNextComments);
       }
+      updateCommentElements();
+
     };
     commentsLoader.addEventListener('click', renderNextComments);
 
