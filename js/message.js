@@ -9,8 +9,7 @@ const onDocumentKeydownInMessage = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeSuccsesMessage();
-    errorMessage.remove();
-    document.addEventListener('keydown', onDocumentKeydown);
+    closeErrorMessage();
   }
 };
 
