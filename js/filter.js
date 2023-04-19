@@ -4,14 +4,13 @@ import { renderingSimilarPictures } from './rendering-images.js';
 import { addedListenerOpenBigPic } from './rendering-big-pic.js';
 import { handleMiniatureClick } from './open-big-pic.js';
 
-renderingSimilarPictures(data);
-
-
 const PICTURES_COUNT = 10;
 const imgFiltersForm = document.querySelector('.img-filters__form');
 const filterDefault = document.querySelector('#filter-default');
 const filterRandom = document.querySelector('#filter-random');
 const filterDiscussed = document.querySelector('#filter-discussed');
+
+renderingSimilarPictures(data);
 
 const sortRandomly = () => Math.random() - 0.5;
 
