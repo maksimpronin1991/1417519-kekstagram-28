@@ -6,7 +6,7 @@ import './message.js';
 const imgFilters = document.querySelector('.img-filters');
 
 
-const BASE_URL = 'https://28.javascript.pages.academy/kekstagra';
+const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
